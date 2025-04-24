@@ -13,7 +13,8 @@ app.get('/generate-token', (req, res) => {
     SECRET_KEY,
     {
       algorithm: 'HS256',
-      expiresIn: '5m',
+      expiresIn: '30m',
+      notBefore: '5s',
       issuer: ACCESS_KEY
     }
   );
