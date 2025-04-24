@@ -8,13 +8,15 @@ const ACCESS_KEY = process.env.ACCESS_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 app.get('/generate-token', (req, res) => {
-  const payload = {
-    accessKey: ACCESS_KEY,
-    iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 300
-  };
-
-  const token = jwt.sign(payload, SECRET_KEY);
+  const token = jwt.sign(
+    {},
+    SECRET_KEY,
+    {
+      algorithm: 'HS256',
+      expiresIn: '5m',
+      issuer: ACCESS_KEY
+    }
+  );
   res.json({ token });
 });
 
